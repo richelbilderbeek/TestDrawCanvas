@@ -51,9 +51,6 @@ ribi::QtTestDrawCanvasMainDialog::QtTestDrawCanvasMainDialog(QWidget *parent) :
     ui->box_line_y2->setValue(0.75 * h);
   }
 
-  m_canvas->m_signal_changed.connect(
-    boost::bind(&ribi::QtTestDrawCanvasMainDialog::OnChanged,this)
-  );
   OnChanged();
 }
 
@@ -186,6 +183,10 @@ void ribi::QtTestDrawCanvasMainDialog::Test() noexcept
     static bool is_tested{false};
     if (is_tested) return;
     is_tested = true;
+  }
+  {
+    ImageCanvas();
+    TextCanvas();
   }
   const TestTimer test_timer(__func__,__FILE__,1.0);
   QtTestDrawCanvasMainDialog d;

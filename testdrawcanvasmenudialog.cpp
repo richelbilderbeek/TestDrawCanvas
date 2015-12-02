@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "drawcanvas.h"
-#include "richelbilderbeekprogram.h"
 #include "trace.h"
 #include "testtimer.h"
 
@@ -74,11 +73,12 @@ ribi::About ribi::TestDrawCanvasMenuDialog::GetAbout() const noexcept
     "Richel Bilderbeek",
     "TestDrawCanvas",
     "tests the DrawCanvas class",
-    "the 10th of January 2014",
+    "December 2nd of 2015",
     "2013-2015",
     "http://www.richelbilderbeek.nl/ToolTestDrawCanvas.htm",
     GetVersion(),
-    GetVersionHistory());
+    GetVersionHistory()
+  );
   a.AddLibrary("Canvas version: " + Canvas::GetVersion());
   a.AddLibrary("DrawCanvas version: " + DrawCanvas::GetVersion());
   a.AddLibrary("Trace version: " + Trace::GetVersion());
@@ -99,18 +99,9 @@ ribi::Help ribi::TestDrawCanvasMenuDialog::GetHelp() const noexcept
   );
 }
 
-boost::shared_ptr<const ribi::Program> ribi::TestDrawCanvasMenuDialog::GetProgram() const noexcept
-{
-  const boost::shared_ptr<const Program> p {
-    new ProgramTestDrawCanvas
-  };
-  assert(p);
-  return p;
-}
-
 std::string ribi::TestDrawCanvasMenuDialog::GetVersion() const noexcept
 {
-  return "1.2";
+  return "2.0";
 }
 
 std::vector<std::string> ribi::TestDrawCanvasMenuDialog::GetVersionHistory() const noexcept
@@ -118,7 +109,8 @@ std::vector<std::string> ribi::TestDrawCanvasMenuDialog::GetVersionHistory() con
   return {
     "2013-08-28: version 1.0: initial desktop version, originally called TestCanvas",
     "2013-11-05: version 1.1: conformized for ProjectRichelBilderbeekConsole",
-    "2014-01-10: version 1.2: renamed TestCanvas to TestDrawCanvas"
+    "2014-01-10: version 1.2: renamed TestCanvas to TestDrawCanvas",
+    "2015-12-02: version 2.0: moved to own GitHub",
   };
 }
 
@@ -130,7 +122,9 @@ void ribi::TestDrawCanvasMenuDialog::Test() noexcept
     if (is_tested) return;
     is_tested = true;
   }
+  {
+    ribi::DrawCanvas();
+  }
   const TestTimer test_timer(__func__,__FILE__,1.0);
-  ribi::DrawCanvas();
 }
 #endif
